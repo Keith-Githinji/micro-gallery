@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Code2, Copy, Check } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
 interface CodeRevealProps {
   code?: string;
@@ -23,8 +23,8 @@ export function CodeReveal({ code, title, className }: CodeRevealProps) {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <Popover>
+      <PopoverTrigger asChild>
         <button
           type="button"
           className={`inline-flex items-center justify-center h-8 w-8 rounded-md border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 shadow-sm transition-colors ${className || ''}`}
@@ -33,25 +33,23 @@ export function CodeReveal({ code, title, className }: CodeRevealProps) {
         >
           <Code2 size={16} />
         </button>
-      </DialogTrigger>
-      <DialogContent className="max-w-3xl">
-        <DialogHeader>
-          <DialogTitle className="flex items-center justify-between gap-3">
-            <span>{title || 'Source code'}</span>
-            <button
-              type="button"
-              onClick={handleCopy}
-              className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50"
-            >
-              {copied ? (<><Check size={16} /> Copied</>) : (<><Copy size={16} /> Copy</>)}
-            </button>
-          </DialogTitle>
-        </DialogHeader>
-        <div className="mt-2 max-h-[65vh] overflow-auto rounded-md border border-slate-200 bg-slate-50">
-          <pre className="p-4 text-xs leading-relaxed"><code>{code || 'No code available.'}</code></pre>
+      </PopoverTrigger>
+      <PopoverContent align="end" side="bottom" className="w-[28rem] sm:w-[36rem] p-0">
+        <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-3 py-2">
+          <span className="text-sm font-medium text-slate-700 truncate">{title || 'Source code'}</span>
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-700 hover:bg-slate-50"
+          >
+            {copied ? (<><Check size={14} /> Copied</>) : (<><Copy size={14} /> Copy</>)}
+          </button>
         </div>
-      </DialogContent>
-    </Dialog>
+        <div className="max-h-[60vh] overflow-auto bg-slate-50">
+          <pre className="p-3 text-[11px] leading-relaxed"><code>{code || 'No code available.'}</code></pre>
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }
 
