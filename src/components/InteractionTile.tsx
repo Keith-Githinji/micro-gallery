@@ -1,17 +1,20 @@
+import React from 'react';
 import { motion } from 'motion/react';
 import { ReactNode } from 'react';
+import { CodeReveal } from './CodeReveal';
 
 interface InteractionTileProps {
   title: string;
   category: string;
   children: ReactNode;
   index: number;
+  code?: string;
 }
 
-export function InteractionTile({ title, category, children, index }: InteractionTileProps) {
+export function InteractionTile({ title, category, children, index, code }: InteractionTileProps) {
   return (
     <motion.div
-      className="bg-white rounded-2xl p-6 shadow-lg border border-slate-200/50 hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm"
+      className="relative bg-white rounded-2xl p-6 shadow-lg border border-slate-200/50 hover:shadow-2xl transition-all duration-500 group backdrop-blur-sm"
       initial={{ opacity: 0, y: 30, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -26,6 +29,11 @@ export function InteractionTile({ title, category, children, index }: Interactio
         boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" 
       }}
     >
+      {code && (
+        <div className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity">
+          <CodeReveal title={title} code={code} />
+        </div>
+      )}
       {/* Category Badge */}
       <motion.div
         className="inline-block px-3 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 text-xs rounded-full mb-3"

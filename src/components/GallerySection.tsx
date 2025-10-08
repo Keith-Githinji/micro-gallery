@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { InteractionTile } from './InteractionTile';
 
@@ -18,26 +18,42 @@ import { ColorShift } from './interactions/ColorShift';
 import { StaggeredEntrance } from './interactions/StaggeredEntrance';
 import { RotationScroll } from './interactions/RotationScroll';
 
+// Raw source imports for code reveal
+import GlowPulseCode from './interactions/GlowPulse.tsx?raw';
+import LiftShadowCode from './interactions/LiftShadow.tsx?raw';
+import GradientWipeCode from './interactions/GradientWipe.tsx?raw';
+import BlurRevealCode from './interactions/BlurReveal.tsx?raw';
+import MorphingButtonCode from './interactions/MorphingButton.tsx?raw';
+import RippleEffectCode from './interactions/RippleEffect.tsx?raw';
+import FlipButtonCode from './interactions/FlipButton.tsx?raw';
+import MagneticHoverCode from './interactions/MagneticHover.tsx?raw';
+import TiltCardCode from './interactions/TiltCard.tsx?raw';
+import RevealContentCode from './interactions/RevealContent.tsx?raw';
+import ParallaxDepthCode from './interactions/ParallaxDepth.tsx?raw';
+import ColorShiftCode from './interactions/ColorShift.tsx?raw';
+import StaggeredEntranceCode from './interactions/StaggeredEntrance.tsx?raw';
+import RotationScrollCode from './interactions/RotationScroll.tsx?raw';
+
 export function GallerySection() {
   const [activeCategory, setActiveCategory] = useState('All');
 
   const categories = ['All', 'Hover', 'Buttons', 'Cards', 'Scroll'];
 
   const interactions = [
-    { id: 1, title: "Glow Pulse", category: "Hover", component: <GlowPulse /> },
-    { id: 2, title: "Lift + Shadow", category: "Hover", component: <LiftShadow /> },
-    { id: 3, title: "Gradient Wipe", category: "Hover", component: <GradientWipe /> },
-    { id: 4, title: "Blur Reveal", category: "Hover", component: <BlurReveal /> },
-    { id: 5, title: "Morphing Button", category: "Buttons", component: <MorphingButton /> },
-    { id: 6, title: "Ripple Click", category: "Buttons", component: <RippleEffect /> },
-    { id: 7, title: "Flip Button", category: "Buttons", component: <FlipButton /> },
-    { id: 8, title: "Magnetic Hover", category: "Buttons", component: <MagneticHover /> },
-    { id: 9, title: "3D Tilt", category: "Cards", component: <TiltCard /> },
-    { id: 10, title: "Reveal Content", category: "Cards", component: <RevealContent /> },
-    { id: 11, title: "Parallax Depth", category: "Cards", component: <ParallaxDepth /> },
-    { id: 12, title: "Color Shift", category: "Cards", component: <ColorShift /> },
-    { id: 13, title: "Staggered Entrance", category: "Scroll", component: <StaggeredEntrance /> },
-    { id: 14, title: "Rotation on Scroll", category: "Scroll", component: <RotationScroll /> }
+    { id: 1, title: "Glow Pulse", category: "Hover", component: <GlowPulse />, code: GlowPulseCode },
+    { id: 2, title: "Lift + Shadow", category: "Hover", component: <LiftShadow />, code: LiftShadowCode },
+    { id: 3, title: "Gradient Wipe", category: "Hover", component: <GradientWipe />, code: GradientWipeCode },
+    { id: 4, title: "Blur Reveal", category: "Hover", component: <BlurReveal />, code: BlurRevealCode },
+    { id: 5, title: "Morphing Button", category: "Buttons", component: <MorphingButton />, code: MorphingButtonCode },
+    { id: 6, title: "Ripple Click", category: "Buttons", component: <RippleEffect />, code: RippleEffectCode },
+    { id: 7, title: "Flip Button", category: "Buttons", component: <FlipButton />, code: FlipButtonCode },
+    { id: 8, title: "Magnetic Hover", category: "Buttons", component: <MagneticHover />, code: MagneticHoverCode },
+    { id: 9, title: "3D Tilt", category: "Cards", component: <TiltCard />, code: TiltCardCode },
+    { id: 10, title: "Reveal Content", category: "Cards", component: <RevealContent />, code: RevealContentCode },
+    { id: 11, title: "Parallax Depth", category: "Cards", component: <ParallaxDepth />, code: ParallaxDepthCode },
+    { id: 12, title: "Color Shift", category: "Cards", component: <ColorShift />, code: ColorShiftCode },
+    { id: 13, title: "Staggered Entrance", category: "Scroll", component: <StaggeredEntrance />, code: StaggeredEntranceCode },
+    { id: 14, title: "Rotation on Scroll", category: "Scroll", component: <RotationScroll />, code: RotationScrollCode }
   ];
 
   const filteredInteractions = activeCategory === 'All' 
@@ -122,6 +138,7 @@ export function GallerySection() {
                 title={interaction.title}
                 category={interaction.category}
                 index={index}
+                code={(interaction as any).code}
               >
                 {interaction.component}
               </InteractionTile>
